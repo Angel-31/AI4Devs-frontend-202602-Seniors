@@ -1,9 +1,24 @@
 import { getApiBaseUrl } from '../config/apiBaseUrl';
 import type {
   InterviewFlowResponse,
+  ListedPositionDto,
   PositionCandidateRow,
   UpdateStageResponse,
 } from '../types/hiringPipeline';
+
+export async function fetchPositionsList(): Promise<ListedPositionDto[]> {
+  const base = getApiBaseUrl();
+  const res = await fetch(`${base}/positions`);
+  const body = await parseJsonOrThrow(res);
+  if (!res.ok) {
+    const msg =
+      body && typeof body === 'object' && 'message' in body
+        ? String((body as { message: unknown }).message)
+        : `Error ${res.status}`;
+    throw new Error(msg);
+  }
+  return body as ListedPositionDto[];
+}
 
 async function parseJsonOrThrow(res: Response): Promise<unknown> {
   const text = await res.text();

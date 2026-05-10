@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import AddCandidateForm from './components/AddCandidateForm';
 import RecruiterDashboard from './components/RecruiterDashboard';
-import { Home } from './pages/Home';
+import { LegacyPositionsRedirect } from './pages/LegacyPositionsRedirect';
+import { PositionsListPage } from './pages/PositionsListPage';
 import { PositionPipelinePage } from './pages/PositionPipelinePage';
 
 /** Un único `<BrowserRouter>` vive en `index.tsx`; aquí solo `<Routes>`. */
@@ -13,9 +14,11 @@ function App() {
     <Routes>
       <Route path="/" element={<RecruiterDashboard />} />
       <Route path="/add-candidate" element={<AddCandidateForm />} />
-      <Route path="/positions" element={<Navigate to="/pipeline" replace />} />
-      <Route path="/pipeline" element={<Home />} />
-      <Route path="/positions/:positionId" element={<PositionPipelinePage />} />
+      <Route path="/positions/:positionId" element={<LegacyPositionsRedirect />} />
+      <Route path="/pipeline" element={<Navigate to="/posiciones" replace />} />
+      <Route path="/positions" element={<Navigate to="/posiciones" replace />} />
+      <Route path="/posiciones" element={<PositionsListPage />} />
+      <Route path="/posiciones/:positionId" element={<PositionPipelinePage />} />
     </Routes>
   );
 }

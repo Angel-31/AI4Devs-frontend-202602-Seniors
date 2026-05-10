@@ -1,0 +1,133 @@
+/* Listado Posiciones — acercamiento al mock */
+
+.posiciones-header {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.posiciones-header-bar {
+  height: 1px;
+  background: #dee2e6;
+  margin-bottom: 1.25rem;
+}
+
+.posiciones-filter-bar input {
+  font-size: 0.875rem;
+}
+
+.posicion-card-shadow {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef !important;
+  border-radius: 0.75rem !important;
+  height: 100%;
+}
+
+.lt-badge-abierto {
+  background-color: #f1b44c !important;
+  color: #fff !important;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  padding: 0.35em 0.75rem;
+}
+
+.lt-badge-lleno {
+  background-color: #34c38f !important;
+  color: #fff !important;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.lt-badge-borrador {
+  background-color: #adb5bd !important;
+  color: #fff !important;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.lt-badge-status {
+  display: inline-block;
+  padding: 0.35em 0.75rem;
+  font-size: 0.75rem;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+/* Kanban proceso */
+
+.board-wrap {
+  min-height: calc(100vh - 120px);
+  background: #e9ecef;
+  padding: 1.25rem;
+}
+
+.board-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.kanban-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.kanban-col {
+  flex: 0 0 min(260px, 92vw);
+  background: #f8f9fa;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  min-height: 320px;
+  border: 1px solid #dee2e6;
+}
+
+.kanban-col-title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.kanban-card {
+  background: #fff;
+  border-radius: 0.55rem;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.6rem;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+}
+
+.kanban-card-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+
+.score-dots {
+  display: flex;
+  gap: 4px;
+  margin-top: 0.35rem;
+}
+
+.score-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #d3ebd8;
+  border: 1px solid #b8dfc2;
+}
+
+.score-dot.filled {
+  background: #34c38f;
+  border-color: #2ca577;
+}
+
+.kanban-mini-select {
+  font-size: 0.72rem !important;
+  padding: 0.2rem 0.35rem !important;
+}

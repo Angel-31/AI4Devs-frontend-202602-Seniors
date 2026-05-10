@@ -22,7 +22,7 @@ const RecruiterDashboard = () => {
                 <Col md={6}>
                     <Card className="shadow p-4">
                         <h5 className="mb-4">Pipeline de contratación</h5>
-                        <Link to="/pipeline">
+                        <Link to="/posiciones">
                             <Button variant="primary" className="btn-block">Elegir posición</Button>
                         </Link>
                     </Card>

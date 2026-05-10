@@ -1,7 +1,14 @@
 import { PrismaClient } from '@prisma/client';
-import { Position } from '../../domain/models/Position';
 
 const prisma = new PrismaClient();
+
+export type ListedPositionDto = {
+    id: number;
+    title: string;
+    status: string;
+    applicationDeadline: string | null;
+    managerName: string;
+};
 
 const calculateAverageScore = (interviews: any[]) => {
     if (interviews.length === 0) return 0;
@@ -31,6 +38,34 @@ export const getCandidatesByPositionService = async (positionId: number) => {
         console.error('Error retrieving candidates by position:', error);
         throw new Error('Error retrieving candidates by position');
     }
+};
+
+export const listPositionsService = async (): Promise<ListedPositionDto[]> => {
+    const positions = await prisma.position.findMany({
+        orderBy: { id: 'asc' },
+        include: { company: true },
+    });
+
+    const out: ListedPositionDto[] = [];
+
+    for (const p of positions) {
+        const employee = await prisma.employee.findFirst({
+            where: { companyId: p.companyId, isActive: true },
+            orderBy: { id: 'asc' },
+        });
+
+        out.push({
+            id: p.id,
+            title: p.title,
+            status: p.status,
+            applicationDeadline: p.applicationDeadline
+                ? p.applicationDeadline.toISOString()
+                : null,
+            managerName: employee?.name ?? '—',
+        });
+    }
+
+    return out;
 };
 
 export const getInterviewFlowByPositionService = async (positionId: number) => {

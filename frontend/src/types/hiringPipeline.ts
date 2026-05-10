@@ -16,6 +16,15 @@ export type InterviewFlowResponse = {
   };
 };
 
+/** GET /positions (listado) */
+export type ListedPositionDto = {
+  id: number;
+  title: string;
+  status: string;
+  applicationDeadline: string | null;
+  managerName: string;
+};
+
 /** Fila devuelta por GET /positions/:id/candidates (incluye ids para el PUT) */
 export type PositionCandidateRow = {
   fullName: string;

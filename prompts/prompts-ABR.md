@@ -95,6 +95,7 @@ Aquí `data.currentInterviewStep` es **número** (id del paso), mientras que en 
 | Método y ruta | Notas |
 |---------------|--------|
 | `GET /positions/:id/interviewFlow` | También válido `/position/:id/interviewFlow` y `.../interviewflow` (minúsculas). Respuesta JSON: `{ positionName, interviewFlow: { … } }` (sin envolver dos veces). |
+| `GET /positions` | Listado para el grid de posiciones: `id`, `title`, `status`, `applicationDeadline` (ISO o `null`), `managerName` (primer empleado activo de la compañía). |
 | `GET /positions/:id/candidates` | Alias igual en `/position/...`. Cada elemento incluye `fullName`, `currentInterviewStep`, `averageScore`, `id` (candidate), `applicationId`. |
 | `PUT /candidates/:id/stage` | `:id` = **candidateId**. Body: `{ "applicationId", "currentInterviewStep" }` (strings o números parseables → `interview_step_id`). Sigue disponible `PUT /candidates/:id` como alias legacy. |
 

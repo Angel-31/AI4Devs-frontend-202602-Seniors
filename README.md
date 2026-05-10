@@ -85,7 +85,7 @@ The backend server will be running at http://localhost:3010, and the frontend wi
 
 The React app includes a small **recruiting dashboard** wired to the Express API:
 
-- **URLs:** Recruiter dashboard at `http://localhost:3000/`, choose position at `http://localhost:3000/pipeline`, then `http://localhost:3000/positions/:positionId` (real id from DB / seed). Legacy `/positions` redirects to `/pipeline`.
+- **URLs:** Dashboard reclutador `http://localhost:3000/`, listado de posiciones **`http://localhost:3000/posiciones`** (también llegas con `/pipeline` → redirección). Kanban del proceso: `http://localhost:3000/posiciones/:positionId`. Rutas antiguas `/positions` y `/positions/:id` redirigen a `/posiciones` (conservando el id).
 - **API base:** in development, `frontend/package.json` has `"proxy": "http://localhost:3010"` so API calls use relative URLs (no CORS issues). Optionally set `REACT_APP_API_URL` in `frontend/.env` for direct calls (see `frontend/.env.example`).
 - **Endpoints used:**
   - `GET /positions/:id/interviewFlow` — position title + interview steps (aliases: `/position/...`, `.../interviewflow`).
@@ -267,7 +267,7 @@ El servidor backend estará corriendo en http://localhost:3010 y el frontend est
 
 La app React incluye un **panel** conectado al API Express:
 
-- **Rutas:** dashboard reclutador `http://localhost:3000/`, elegir posición `http://localhost:3000/pipeline`, proceso `http://localhost:3000/positions/:positionId` (usa un `positionId` real de tu BD / seed). La ruta antigua `/positions` redirige a `/pipeline`.
+- **Rutas:** dashboard `http://localhost:3000/`, listado **`/posiciones`** (o `/pipeline`, redirige al mismo sitio), tablero Kanban **`/posiciones/:positionId`**. Las rutas en inglés `/positions` redirigen manteniendo el id si aplica.
 - **URL del backend:** en desarrollo, `"proxy"` en `frontend/package.json` reenvía al API en `:3010` usando rutas relativas. Opcional: `REACT_APP_API_URL` en `frontend/.env` si quieres llamadas directas (plantilla `frontend/.env.example`).
 - **Endpoints:**
   - `GET /positions/:id/interviewFlow` — nombre de posición + pasos (también `/position/...` y variante `interviewflow` en minúsculas).
