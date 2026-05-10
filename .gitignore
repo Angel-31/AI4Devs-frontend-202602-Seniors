@@ -25,4 +25,7 @@ yarn-error.log*
 .idea
 .vscode
 
-# .env
+# Variables locales (no subir secretos): plantilla en frontend/.env.example
+**/frontend/.env
+**/frontend/.env.local
+**/.env

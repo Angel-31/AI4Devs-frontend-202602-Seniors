@@ -19,6 +19,8 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', getCandidateById);
 
+// Actualizar etapa: PUT /candidates/:id/stage (id en path = candidateId)
+router.put('/:id/stage', updateCandidateStageController);
 router.put('/:id', updateCandidateStageController);
 
 export default router;

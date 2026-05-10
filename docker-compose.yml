@@ -1,12 +1,21 @@
-version: "3.1"
-
+# PostgreSQL ligero: imagen Alpine (~80 MiB menos que la variante Debian).
+# Variables: DB_USER, DB_PASSWORD, DB_NAME, DB_PORT (crea un .env en esta carpeta si no existe).
 services:
   db:
-    image: postgres
-    restart: always
+    image: postgres:16-alpine
+    restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-postgres}
     ports:
-      - ${DB_PORT}:5432
+      - "${DB_PORT:-5432}:5432"
+    # Menor huella de RAM en local (ajusta si necesitas más carga)
+    command:
+      - postgres
+      - -c
+      - shared_buffers=64MB
+      - -c
+      - max_connections=30
+      - -c
+      - work_mem=4MB

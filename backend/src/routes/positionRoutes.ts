@@ -1,9 +1,10 @@
+import { Router } from 'express';
 import { getCandidatesByPosition, getInterviewFlowByPosition } from '../presentation/controllers/positionController';
 
-
-const router = require('express').Router();
+const router = Router();
 
 router.get('/:id/candidates', getCandidatesByPosition);
 router.get('/:id/interviewflow', getInterviewFlowByPosition);
+router.get('/:id/interviewFlow', getInterviewFlowByPosition);
 
 export default router;

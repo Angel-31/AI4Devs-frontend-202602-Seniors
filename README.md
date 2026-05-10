@@ -81,6 +81,21 @@ npm start
 
 The backend server will be running at http://localhost:3010, and the frontend will be available at http://localhost:3000.
 
+## Hiring pipeline (positions & interview stages)
+
+The React app includes a small **recruiting dashboard** wired to the Express API:
+
+- **URLs:** Recruiter dashboard at `http://localhost:3000/`, choose position at `http://localhost:3000/pipeline`, then `http://localhost:3000/positions/:positionId` (real id from DB / seed). Legacy `/positions` redirects to `/pipeline`.
+- **API base:** in development, `frontend/package.json` has `"proxy": "http://localhost:3010"` so API calls use relative URLs (no CORS issues). Optionally set `REACT_APP_API_URL` in `frontend/.env` for direct calls (see `frontend/.env.example`).
+- **Endpoints used:**
+  - `GET /positions/:id/interviewFlow` — position title + interview steps (aliases: `/position/...`, `.../interviewflow`).
+  - `GET /positions/:id/candidates` — candidates with `fullName`, `currentInterviewStep` (step **name**), `averageScore`, plus `applicationId` and candidate `id` for updates.
+  - `PUT /candidates/:candidateId/stage` — body `{ "applicationId", "currentInterviewStep" }` where `currentInterviewStep` is the **interview step id** (same as Prisma column). Legacy alias: `PUT /candidates/:candidateId`.
+
+Source layout: `frontend/src/api/hiringPipelineApi.ts`, `frontend/src/types/hiringPipeline.ts`, `frontend/src/components/PositionHiringDashboard.tsx`.
+
+Architecture / review prompts for contributors and AI agents: **`prompts/prompts-ABR.md`** (alias: `prompts/prompt-ABR.md`).
+
 ## Docker y PostgreSQL
 
 This project uses Docker to run a PostgreSQL database. Here's how to get it up and running:
@@ -247,6 +262,21 @@ npm start
 ```
 
 El servidor backend estará corriendo en http://localhost:3010 y el frontend estará disponible en http://localhost:3000.
+
+## Pipeline de contratación (posiciones y etapas)
+
+La app React incluye un **panel** conectado al API Express:
+
+- **Rutas:** dashboard reclutador `http://localhost:3000/`, elegir posición `http://localhost:3000/pipeline`, proceso `http://localhost:3000/positions/:positionId` (usa un `positionId` real de tu BD / seed). La ruta antigua `/positions` redirige a `/pipeline`.
+- **URL del backend:** en desarrollo, `"proxy"` en `frontend/package.json` reenvía al API en `:3010` usando rutas relativas. Opcional: `REACT_APP_API_URL` en `frontend/.env` si quieres llamadas directas (plantilla `frontend/.env.example`).
+- **Endpoints:**
+  - `GET /positions/:id/interviewFlow` — nombre de posición + pasos (también `/position/...` y variante `interviewflow` en minúsculas).
+  - `GET /positions/:id/candidates` — candidatos con nombre, **nombre de etapa**, nota media, `applicationId` e `id` de candidato.
+  - `PUT /candidates/:candidateId/stage` — body `{ "applicationId", "currentInterviewStep" }` (`currentInterviewStep` = **id numérico del paso**). Alias legacy: `PUT /candidates/:candidateId`.
+
+Código: `frontend/src/api/hiringPipelineApi.ts`, `frontend/src/types/hiringPipeline.ts`, `frontend/src/components/PositionHiringDashboard.tsx`.
+
+Guía para revisión SOLID/CUPID + contrato HTTP: **`prompts/prompts-ABR.md`** (alias `prompts/prompt-ABR.md`).
 
 ## Docker y PostgreSQL
 

@@ -18,8 +18,9 @@ export const getCandidatesByPosition = async (req: Request, res: Response) => {
 export const getInterviewFlowByPosition = async (req: Request, res: Response) => {
     try {
         const positionId = parseInt(req.params.id);
-        const interviewFlow = await getInterviewFlowByPositionService(positionId);
-        res.status(200).json({ interviewFlow });
+        const payload = await getInterviewFlowByPositionService(positionId);
+        // Servicio ya devuelve { positionName, interviewFlow } — no anidar otra vez.
+        res.status(200).json(payload);
     } catch (error) {
         if (error instanceof Error) {
             res.status(404).json({ message: 'Position not found', error: error.message });

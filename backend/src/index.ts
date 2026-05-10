@@ -31,11 +31,18 @@ app.use((req, res, next) => {
   next();
 });
 
-// Middleware para permitir CORS desde http://localhost:3000
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}));
+// Middleware CORS: SPA en :3000 (localhost o 127.0.0.1)
+app.use(
+  cors({
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    credentials: true,
+  })
+);
+
+// Comprobación rápida en navegador: http://localhost:3010/
+app.get('/', (_req, res) => {
+  res.type('text/plain; charset=utf-8').send('Hola LTI!');
+});
 
 // Import and use candidateRoutes
 app.use('/candidates', candidateRoutes);
@@ -43,8 +50,9 @@ app.use('/candidates', candidateRoutes);
 // Route for file uploads
 app.post('/upload', uploadFile);
 
-// Route to get candidates by position
+// Rutas de posición (alias /position y /positions por compatibilidad)
 app.use('/position', positionRoutes);
+app.use('/positions', positionRoutes);
 
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
@@ -52,10 +60,6 @@ app.use((req, res, next) => {
 });
 
 const port = 3010;
-
-app.get('/', (req, res) => {
-  res.send('Hola LTI!');
-});
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);

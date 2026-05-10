@@ -37,7 +37,7 @@ export const updateCandidateStageController = async (req: Request, res: Response
         const { applicationId, currentInterviewStep } = req.body;
         const applicationIdNumber = parseInt(applicationId);
         if (isNaN(applicationIdNumber)) {
-            return res.status(400).json({ error: 'Invalid position ID format' });
+            return res.status(400).json({ error: 'Invalid applicationId format' });
         }
         const currentInterviewStepNumber = parseInt(currentInterviewStep);
         if (isNaN(currentInterviewStepNumber)) {
